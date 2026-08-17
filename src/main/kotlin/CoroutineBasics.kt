@@ -9,6 +9,8 @@ suspend fun doWork() {
 
 fun main() = runBlocking {
     println("Main Started")
-    launch { doWork() }.join() // launch creates the coroutine, and doWork() is called inside it.
+    // The important thing is understanding that launch doesn't promise when the coroutine gets CPU time.
+    // launch creates the coroutine, and doWork() is called inside it.
+    launch { doWork() }.join()
     println("Main Finished")
 }
