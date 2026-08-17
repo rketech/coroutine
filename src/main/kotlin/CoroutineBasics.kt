@@ -1,14 +1,14 @@
 import kotlinx.coroutines.*
 
+// "This function may suspend, so it must be called from a coroutine or another suspend function."
+suspend fun doWork() {
+    println("Work Started")
+    delay(2000)
+    println("Work Finished")
+}
+
 fun main() = runBlocking {
-
-    println("Main started")
-
-    launch {
-        println("Task started")
-        delay(2000)
-        println("Task finished")
-    }
-
-    println("Main finished")
+    println("Main Started")
+    launch { doWork() } // launch creates the coroutine, and doWork() is called inside it.
+    println("Main Finished")
 }
