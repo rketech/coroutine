@@ -1,26 +1,26 @@
 /*
-    Dispatchers.Default
-            ↓
-    CPU-intensive work
+Structured Concurrency
 
-    Dispatchers.IO
-            ↓
-    Network / database / file I/O
+This sounds fancy, but the idea is simple:
 
-    Dispatchers.Main
-            ↓
-    Android UI
-
+Child coroutines belong to their parent scope.
 */
 
 import kotlinx.coroutines.*
 
 fun main(): Unit = runBlocking {
-    launch(Dispatchers.Default){
-        println("Default Thread: ${Thread.currentThread().name}")
+
+    launch {
+        println("Task 1")
+        delay(9000)
+        println("Task 1 Completed")
     }
 
-    launch(Dispatchers.IO) {
-        println("IO Thread: ${Thread.currentThread().name}")
+    launch {
+        println("Task 2")
+        delay(5000)
+        println("Task 2 Completed")
     }
+
+    println("Parent is Working")
 }
