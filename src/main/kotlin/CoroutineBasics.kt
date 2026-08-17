@@ -1,15 +1,16 @@
 /*
-The mental model:
+    Dispatchers.Default
+            ↓
+    CPU-intensive work
 
-    delay()
-        Coroutine ──⏸️──→ resumes
-        Thread    ─────────→ can do other work
+    Dispatchers.IO
+            ↓
+    Network / database / file I/O
 
-    versus:
+    Dispatchers.Main
+            ↓
+    Android UI
 
-    Thread.sleep()
-        Thread ──⏸️──→ blocked
-        Coroutine ─────→ can't use that thread
 */
 
 import kotlinx.coroutines.*
