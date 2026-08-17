@@ -1,26 +1,17 @@
 /*
-Structured Concurrency
-
-This sounds fancy, but the idea is simple:
-
-Child coroutines belong to their parent scope.
+    Coroutine Exceptions
 */
 
 import kotlinx.coroutines.*
 
-fun main(): Unit = runBlocking {
-
+fun main() = runBlocking {
     launch {
-        println("Task 1")
-        delay(9000)
-        println("Task 1 Completed")
+        try {
+            println("Task Started")
+            throw Exception("Something went wrong")
+        }catch (e: Exception) {
+            println(e.message)
+        }
     }
-
-    launch {
-        println("Task 2")
-        delay(5000)
-        println("Task 2 Completed")
-    }
-
-    println("Parent is Working")
+    println("Main Continue")
 }
