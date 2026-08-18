@@ -1,17 +1,15 @@
 /*
-    Coroutine Exceptions
+    async + await
 */
 
 import kotlinx.coroutines.*
 
 fun main() = runBlocking {
-    launch {
-        try {
-            println("Task Started")
-            throw Exception("Something went wrong")
-        }catch (e: Exception) {
-            println(e.message)
-        }
+    val result = async {
+        delay(2000)
+        10 + 20
     }
-    println("Main Continue")
+    println("Doing Something Else....")
+    val total = result.await()
+    println("The total is $total")
 }
