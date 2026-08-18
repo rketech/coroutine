@@ -1,21 +1,19 @@
 /*
-    async + await
+    withContext
 */
 
 import kotlinx.coroutines.*
 
 fun main() = runBlocking {
-    val price = async {
-        delay(2000)
-        10
-    }
+    println("Main: ${Thread.currentThread().name}")
 
-    val quantity = async{
-        delay(2000)
-        50
+    // The special instruction is:
+    // "Run this block using the IO dispatcher, and don't continue to the next line until this block has produced its result."
+    // That's the key.
+    val result = withContext(Dispatchers.IO) {
+        println("IO: ${Thread.currentThread().name}")
+        "Data Received"
     }
-
-    println("Doing Something Else....")
-    val total = price.await() * quantity.await()
-    println("The total is $total")
+    println(result)
+    println("Back: ${Thread.currentThread().name}")
 }
