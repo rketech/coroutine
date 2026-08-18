@@ -5,11 +5,17 @@
 import kotlinx.coroutines.*
 
 fun main() = runBlocking {
-    val result = async {
+    val price = async {
         delay(2000)
-        10 + 20
+        10
     }
+
+    val quantity = async{
+        delay(2000)
+        50
+    }
+
     println("Doing Something Else....")
-    val total = result.await()
+    val total = price.await() * quantity.await()
     println("The total is $total")
 }
